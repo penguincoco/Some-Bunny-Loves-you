@@ -10,21 +10,9 @@ public class ClickableObject : MonoBehaviour
     private GameObject currentlyFocused;
     private int previousLayer;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnMouseDown()
     {
-        Debug.Log("clicked");
+        GameManager.Instance.SetBunnyCounter();
         Destroy(this.gameObject);
         //SetFocused(this.gameObject);
     }
