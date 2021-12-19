@@ -23,7 +23,7 @@ public class FiniteStateMachine<TContext>
 			"Updating FiniteStateMachine with null current state. Did you forget to transition to a starting state?");
 
 		CurrentState.Update();
-
+		
 		PerformPendingTransition();
 	}
 

@@ -5,17 +5,22 @@ using UnityEngine.UI;
 
 public class Bunny : MonoBehaviour
 {
+    public GameObject collider;
+
     public SpriteRenderer sr;
 
     FiniteStateMachine<Bunny> bunnySM;
 
-    Sprite[] bunnyStateSprites;
+    public Sprite[] bunnyRestingSprites;
+    public Sprite[] bunnyStateSprites;
 
     public float alertTimer;
-    private string bunnyState;
+    [SerializeField]private string bunnyState;
+
+    [SerializeField]private int bunnyPointVal;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         bunnySM = new FiniteStateMachine<Bunny>(this);
         bunnySM.TransitionTo<Eating>();
@@ -31,7 +36,7 @@ public class Bunny : MonoBehaviour
         bunnyState = "eating";
 
         //give it a random location
-        gameObject.transform.position = new Vector2(Random.Range(-5,5), Random.Range(-5,5));
+        gameObject.transform.position = new Vector2(Random.Range(-5,35), Random.Range(-5,5));
 
         //give it a random layer
         if (Random.Range(0, 2) == 1)
@@ -44,6 +49,10 @@ public class Bunny : MonoBehaviour
             this.gameObject.layer = 7;
             GameManager.Instance.foregroundObjs.Add(this.gameObject);
         }
+
+        collider = this.gameObject.transform.GetChild(0).gameObject;
+
+        bunnyStateSprites[0] = bunnyRestingSprites[Random.Range(0, bunnyRestingSprites.Length)];
     }
 
     // Update is called once per frame
@@ -54,26 +63,28 @@ public class Bunny : MonoBehaviour
 
     public void ChangeState()
     {
+        if (bunnySM.CurrentState.GetType() == typeof(Eating))
+            bunnySM.TransitionTo<Alert>();
+        if (bunnySM.CurrentState.GetType() == typeof(Alert))
+            bunnySM.TransitionTo<Running>();
+
         //if (bunnySM.CurrentState == Eating || bunnySM.CurrentState == Resting)
         //  bunnySM.TransitionTo<Alert>();
 
-        if (bunnyState.Equals("eating"))
-            bunnySM.TransitionTo<Alert>();
-        if (bunnyState.Equals("alert"))
-            bunnySM.TransitionTo<Running>();
-    }
-   
-    public void ChangeState(string changeToState)
-    {
-        if (changeToState.Equals("eating"))
-            bunnySM.TransitionTo<Eating>();
-        if (changeToState.Equals("alert"))
-            bunnySM.TransitionTo<Alert>();
+        //if (bunnyState.Equals("eating"))
+        //    bunnySM.TransitionTo<Alert>();
+        //if (bunnyState.Equals("alert"))
+        //    bunnySM.TransitionTo<Running>();
     }
 
     public void DestroyObj()
     {
         Destroy(this.gameObject);
+    }
+
+    public int GetBunnyPointVal()
+    {
+        return bunnyPointVal;
     }
 
 
@@ -85,6 +96,8 @@ public class Bunny : MonoBehaviour
         public override void OnEnter()
         {
             Context.bunnyState = "eating";
+            Context.bunnyPointVal = 1;
+            Context.sr.sprite = Context.bunnyStateSprites[0];
         }
 
         public override void StateCheck()
@@ -111,6 +124,8 @@ public class Bunny : MonoBehaviour
             Context.sr.color = Color.red;
             timer = Context.alertTimer;
             Context.bunnyState = "alert";
+            Context.bunnyPointVal = 2; 
+            Context.sr.sprite = Context.bunnyStateSprites[1];
         }
 
         public override void Update()
@@ -130,10 +145,21 @@ public class Bunny : MonoBehaviour
     }
 
     private class Running : FiniteStateMachine<Bunny>.State {
+        float runTimer = 1f;
         public override void OnEnter()
         {
             Context.sr.color = Color.green;
-            Context.DestroyObj();
+            Context.bunnyPointVal = 3;
+        }
+
+        public override void Update()
+        {
+            runTimer -= Time.deltaTime;
+
+            if (runTimer <= 0)
+            {
+                Context.DestroyObj();
+            }
         }
     } 
 }

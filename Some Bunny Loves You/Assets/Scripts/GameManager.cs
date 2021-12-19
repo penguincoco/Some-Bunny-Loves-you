@@ -6,13 +6,11 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject pauseMenu;
+    public bool isPauseMenuOpen;
+    
     public TMP_Text bunnyCounterTxt;
     private int bunnyCounter;
-
-    [SerializeField] private FocusSwitcher focus;
-
-    private static GameManager _instance;
-    public static GameManager Instance { get { return _instance; } }       
 
     public GameObject foregroundObjsContainer;
     public GameObject backgroundObjsContainer;
@@ -20,24 +18,27 @@ public class GameManager : MonoBehaviour
     public List<GameObject> foregroundObjs = new List<GameObject>();
     public List<GameObject> backgroundObjs = new List<GameObject>();
 
+    [SerializeField] private FocusSwitcher focus;
     public Camera focusCam;
 
     public bool isForegroundActive = true;
 
     int foregroundLayer;
     int backgroundLayer;
+    int ignoreRaycastLayer;
+    int defaultLayer;
+
+    public bool debugMode;
+    private static GameManager _instance;
+    public static GameManager Instance { get { return _instance; } }   
 
     private void Awake()
     {
         //singleton pattern
         if (_instance != null && _instance != this)
-        {
             Destroy(this.gameObject);
-        }
         else
-        {
             _instance = this;
-        }
     }
 
     void Start()
@@ -47,8 +48,51 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(foregroundObjs.Count);
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (!isPauseMenuOpen)
+            GroundToggle();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pauseMenu.activeSelf)
+                PauseMenu(false, true);
+            else
+                PauseMenu(true, false); 
+        }
+
+        if (debugMode)
+            DebugKeys();
+    }
+
+    public void PauseMenu(bool isPauseMenuOpen, bool areObjectsMoving) 
+    {
+        this.isPauseMenuOpen = isPauseMenuOpen;
+
+        CameraMovement.Instance.SetCamMoving(areObjectsMoving);
+        pauseMenu.gameObject.SetActive(isPauseMenuOpen);
+
+        if (isPauseMenuOpen) 
+        {
+            ToggleClickableObjects(false, foregroundObjs);
+            ToggleClickableObjects(false, backgroundObjs);
+        }
+        else 
+        {
+            if (isForegroundActive) 
+            {
+                ToggleClickableObjects(true, foregroundObjs);
+                ToggleClickableObjects(false, backgroundObjs);
+            }    
+            else 
+            {
+                ToggleClickableObjects(false, foregroundObjs);
+                ToggleClickableObjects(true, backgroundObjs);
+            }
+        }
+    }
+
+    public void GroundToggle() 
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
             focusCam.cullingMask = 1 << foregroundLayer;
 
@@ -59,7 +103,7 @@ public class GameManager : MonoBehaviour
             isForegroundActive = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
             focusCam.cullingMask = 1 << backgroundLayer;
 
@@ -68,16 +112,17 @@ public class GameManager : MonoBehaviour
 
             isForegroundActive = false;
         }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(0);
-        }
     }
 
-    public void SetBunnyCounter()
+    public void DebugKeys()
     {
-        bunnyCounter++;
+        if (Input.GetKeyDown(KeyCode.R))
+            SceneManager.LoadScene(0);
+    }
+
+    public void IncreaseBunnyCounter(int points)
+    {
+        bunnyCounter += points;
         bunnyCounterTxt.text = bunnyCounter.ToString();
     }
 
@@ -102,7 +147,8 @@ public class GameManager : MonoBehaviour
 
         foregroundLayer = LayerMask.NameToLayer("foreground");
         backgroundLayer = LayerMask.NameToLayer("background");
-
+        ignoreRaycastLayer = LayerMask.NameToLayer("Ignore Raycast");
+        defaultLayer = LayerMask.NameToLayer("Default");
         focusCam.cullingMask = 1 << foregroundLayer;
 
         ToggleClickableObjects(true, foregroundObjs);
@@ -115,32 +161,14 @@ public class GameManager : MonoBehaviour
         {
             if (obj != null && obj.gameObject.GetComponent<ClickableObject>() != null)
             {
-                obj.gameObject.GetComponent<Collider2D>().enabled = toggle;
-                obj.gameObject.GetComponent<ClickableObject>().enabled = toggle;
+                if(toggle)
+                    obj.gameObject.GetComponent<Bunny>().collider.layer = defaultLayer;
+                else
+                    obj.gameObject.GetComponent<Bunny>().collider.layer = ignoreRaycastLayer;
+
+                //obj.gameObject.GetComponent<Collider>().enabled = toggle;
+                //obj.gameObject.GetComponent<ClickableObject>().enabled = toggle;
             }
         }
     }
-
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.F))
-    //    {
-    //        foreach
-    //        focus.SetFocused()
-    //    }
-    //}
-
-
-    //private void OnMouseEnter()
-    //{
-    //    focus.SetFocused(gameObject);
-    //}
-
-    //private void OnMouseExit()
-    //{
-    //    // reset the focus
-    //    // in the future you should maybe check first
-    //    // if this object is actually the focused one currently
-    //    focus.SetFocused(null);
-    //}
 }

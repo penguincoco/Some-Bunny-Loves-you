@@ -5,7 +5,7 @@ using UnityEngine;
 public class BunnyManager : MonoBehaviour
 {
     public GameObject bunnyPrefab;
-
+    public int numberOfBunnies;
     public float bunnyAlertTimer;
 
     private static BunnyManager _instance;
@@ -22,18 +22,13 @@ public class BunnyManager : MonoBehaviour
         {
             _instance = this;
         }
-
         SpawnBunnies();
-    }
-
-    private void Start()
-    {
-        
     }
 
     private void SpawnBunnies()
     {
-
+        for (int i = 0; i < numberOfBunnies; i++)
+            Instantiate(bunnyPrefab);
     }
 
     public float GetBunnyAlertTimer()
