@@ -6391,3 +6391,51 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 30601.494141 seconds.
+  path: Assets/Prefabs/Bunny.prefab
+  artifactKey: Guid(a5fc32ebfc2814cecbbf9ebfcaaa0ba8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Bunny.prefab using Guid(a5fc32ebfc2814cecbbf9ebfcaaa0ba8) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '90b347e7a847b25b0c512d8d76fd1dee') in 0.222007 seconds 
+  Import took 0.247485 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 245.060810 seconds.
+  path: Assets/Art/PSDs
+  artifactKey: Guid(78c0d19e2a62f48b2a658fa4b5c39a31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/PSDs using Guid(78c0d19e2a62f48b2a658fa4b5c39a31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ceca9b50743d3ef4fc0b553208074dc6') in 0.001593 seconds 
+  Import took 0.006560 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 16.598755 seconds.
+  path: Assets/Art/PSDs/background.psd
+  artifactKey: Guid(66fce16ef3336459793ba6367de7f4a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/PSDs/background.psd using Guid(66fce16ef3336459793ba6367de7f4a6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0a8d012e5027c9b3a6ef9553bf4e54e4') in 0.327509 seconds 
+  Import took 0.333739 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.989987 seconds.
+  path: Assets/Art/PSDs/bunny front.psd
+  artifactKey: Guid(62a608505929142bab7d37de1b16b602) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/PSDs/bunny front.psd using Guid(62a608505929142bab7d37de1b16b602) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '024eeb4777990e7b8db21a109c7acbd5') in 0.014871 seconds 
+  Import took 0.021201 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.202286 seconds.
+  path: Assets/Art/PSDs/bunny sprite sheet.psd
+  artifactKey: Guid(c0fa824a8c9704f80b14c0c79c52e024) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/PSDs/bunny sprite sheet.psd using Guid(c0fa824a8c9704f80b14c0c79c52e024) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb3e5f96a9185a1df532cec99358f336') in 0.011793 seconds 
+  Import took 0.017701 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001538 seconds.
+  path: Assets/Art/PSDs/bunny sprite sheet.psd
+  artifactKey: Guid(c0fa824a8c9704f80b14c0c79c52e024) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/PSDs/bunny sprite sheet.psd using Guid(c0fa824a8c9704f80b14c0c79c52e024) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fb3e5f96a9185a1df532cec99358f336') in 0.010728 seconds 
+  Import took 0.015816 seconds .
+
