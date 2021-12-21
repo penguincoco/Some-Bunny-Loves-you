@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject pauseMenu;
     public bool isPauseMenuOpen;
+    public GameObject whistleRangeCheckObj;
     
     public TMP_Text bunnyCounterTxt;
     private int bunnyCounter;
@@ -49,7 +50,10 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (!isPauseMenuOpen)
+        {
             GroundToggle();
+            Whistle();
+        } 
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -94,6 +98,8 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
+            Debug.Log("toggling");
+            UIManager.Instance.LightUpSprite(true);
             focusCam.cullingMask = 1 << foregroundLayer;
 
             //enable all clickable objects
@@ -105,12 +111,22 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
+            UIManager.Instance.LightUpSprite(false);
             focusCam.cullingMask = 1 << backgroundLayer;
 
             ToggleClickableObjects(false, foregroundObjs);
             ToggleClickableObjects(true, backgroundObjs);
 
             isForegroundActive = false;
+        }
+    }
+
+    public void Whistle()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            UIManager.Instance.LightUpWhistle();
+            whistleRangeCheckObj.gameObject.GetComponent<WhistleRangeCheck>().CheckForBunnies();
         }
     }
 

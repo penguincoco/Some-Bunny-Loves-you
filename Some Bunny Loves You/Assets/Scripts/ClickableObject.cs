@@ -13,8 +13,8 @@ public class ClickableObject : MonoBehaviour
     void OnMouseDown()
     {
         Debug.Log("clicking on bunny");
-        GameManager.Instance.IncreaseBunnyCounter(this.gameObject.GetComponent<Bunny>().GetBunnyPointVal());
-        Destroy(this.gameObject);
+        GameManager.Instance.IncreaseBunnyCounter(transform.parent.gameObject.GetComponent<Bunny>().GetBunnyPointVal());
+        Destroy(this.transform.parent.gameObject);
         //SetFocused(this.gameObject);
     }
 

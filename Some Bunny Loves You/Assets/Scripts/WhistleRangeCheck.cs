@@ -5,8 +5,8 @@ using UnityEngine;
 public class WhistleRangeCheck : MonoBehaviour
 {
     //List<Collider2D> bunniesInRange;
-    //Collider2D[] bunniesInRange;
-    Collider[] bunniesInRange;
+    Collider2D[] bunniesInRange;
+    //Collider[] bunniesInRange;
     public LayerMask m_LayerMask;
     public ContactFilter2D m_contactFilter;
     bool m_started;
@@ -26,14 +26,11 @@ public class WhistleRangeCheck : MonoBehaviour
         //Use the OverlapBox to detect if there are any other colliders within this box area.
         //Use the GameObject's centre, half the size (as a radius) and rotation. This creates an invisible box around your GameObject.
 
-        bunniesInRange = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, m_LayerMask);
-       // bunnyInRangeCount = Physics2D.OverlapCircle(gameObject.transform.position, 3f, m_contactFilter, bunniesInRange);
-        //bunnyInRangeCount = Physics2D.OverlapCircle(gameObject.transform.position, 10f, m_contactFilter, bunniesInRange);
+        //bunniesInRange = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, m_LayerMask);
+        bunniesInRange = Physics2D.OverlapCircleAll(gameObject.transform.position, 3f, m_LayerMask, -100f, 100f);
 
-        Debug.Log(bunniesInRange.Length);
-
-        //foreach (Collider2D bunny in bunniesInRange)
-        foreach (Collider bunny in bunniesInRange)
+        foreach (Collider2D bunny in bunniesInRange)
+        //foreach (Collider bunny in bunniesInRange)
         {
             if (bunny != null && bunny.transform.parent.gameObject.GetComponent<Bunny>() != null)
             {
@@ -42,31 +39,6 @@ public class WhistleRangeCheck : MonoBehaviour
             }
         }
     }
-
-    private void FixedUpdate()
-    {
-        
-    }
-
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    bunniesInRange.Add(collision);
-    //    Debug.Log(bunniesInRange.Count);
-    //}
-    
-    //private void FixedUpdate()
-    //{
-    //    bunniesInRange = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, m_LayerMask);
-    //    int i = 0;
-    //    Debug.Log(bunniesInRange.Length);
-    //    //Check when there is a new collider coming into contact with the box
-    //    while (i < bunniesInRange.Length)
-    //    {
-    //        Debug.Log("Hit : " + bunniesInRange[i].name + i);
-    //        //Increase the number of Colliders in the array
-    //        i++;
-    //    }
-    //}
 
     //Draw the Box Overlap as a gizmo to show where it currently is testing. Click the Gizmos button to see this
     void OnDrawGizmos()
