@@ -7,7 +7,7 @@ public class CameraManager : MonoBehaviour
     public Component[] parallaxScrs;
     public CameraMovement camMovementScr;
 
-     private static CameraManager _instance;
+    private static CameraManager _instance;
     public static CameraManager Instance { get { return _instance; } }    
 
     private void Awake()
@@ -27,6 +27,14 @@ public class CameraManager : MonoBehaviour
     {
         parallaxScrs = this.gameObject.GetComponents(typeof(Parallax));
         camMovementScr = this.gameObject.GetComponent<CameraMovement>();
+    }
+
+    void Update() 
+    {
+        if (GameManager.Instance.debugMode) 
+        {
+            EnableMovements(false);
+        }
     }
 
     public void EnableMovements(bool enable) 
