@@ -11,6 +11,6 @@ public class CheckpointManager : MonoBehaviour
     void Update()
     {
         if (Camera.main.gameObject.transform.position.x >= endPoint.x) 
-            CameraMovement.Instance.stepSize = 0f;
+            CameraManager.Instance.EnableMovements(false);
     }
 }

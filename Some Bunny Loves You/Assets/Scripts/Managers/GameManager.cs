@@ -7,7 +7,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public GameObject pauseMenu;
-    public bool isPauseMenuOpen;
+    public bool isPauseMenuOpen = true;
     public GameObject whistleRangeCheckObj;
     
     public TMP_Text bunnyCounterTxt;
@@ -71,7 +71,8 @@ public class GameManager : MonoBehaviour
     {
         this.isPauseMenuOpen = isPauseMenuOpen;
 
-        CameraMovement.Instance.SetCamMoving(areObjectsMoving);
+        //CameraMovement.Instance.SetCamMoving(areObjectsMoving);
+        CameraManager.Instance.EnableMovements(areObjectsMoving);
         pauseMenu.gameObject.SetActive(isPauseMenuOpen);
 
         if (isPauseMenuOpen) 
@@ -167,11 +168,11 @@ public class GameManager : MonoBehaviour
         defaultLayer = LayerMask.NameToLayer("Default");
         focusCam.cullingMask = 1 << foregroundLayer;
 
-        ToggleClickableObjects(true, foregroundObjs);
+        ToggleClickableObjects(false, foregroundObjs);
         ToggleClickableObjects(false, backgroundObjs);
     }
 
-    void ToggleClickableObjects(bool toggle, List<GameObject> gameObjs)
+    public void ToggleClickableObjects(bool toggle, List<GameObject> gameObjs)
     {
         foreach (GameObject obj in gameObjs)
         {

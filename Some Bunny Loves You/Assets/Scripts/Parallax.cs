@@ -20,10 +20,9 @@ public class Parallax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (!GameManager.Instance.isPauseMenuOpen)
-        {
-        //foreach(GameObject obj in GameManager.Instance.backgroundObjs)
+    //     if (!GameManager.Instance.isPauseMenuOpen)
+    //     {
+    //     //foreach(GameObject obj in GameManager.Instance.backgroundObjs)
             foreach(GameObject obj in parallaxObjs)
             {
                 if (obj != null)
@@ -33,7 +32,7 @@ public class Parallax : MonoBehaviour
                     obj.transform.position = objPos;
                 }
             }
-        }
+        // }
     }
 
     public void SetParallaxing(bool isParallaxing) {

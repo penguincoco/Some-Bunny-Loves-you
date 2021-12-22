@@ -27,7 +27,7 @@ public class BunnyManager : MonoBehaviour
 
     private void SpawnBunnies()
     {
-        for (int i = 0; i < numberOfBunnies; i++)
+        for (int i = 0; i < numberOfBunnies; i++) 
             Instantiate(bunnyPrefab);
     }
 
