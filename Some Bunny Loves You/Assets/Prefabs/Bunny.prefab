@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2918473789775197470}
   - component: {fileID: 8026034220528757218}
   - component: {fileID: 2117605248216863694}
+  - component: {fileID: -333523523860860699}
   m_Layer: 6
   m_Name: Bunny
   m_TagString: Untagged
@@ -55,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 6245e61c7a81a479aa449f08b279a600, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: -1879197975
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: fc8d4ffaccf0d4253ac094cb2ff83902, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e7a1cb89a757141a189bf1df8ec1cf09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -123,6 +124,8 @@ MonoBehaviour:
   alertTimer: 0
   bunnyState: 
   bunnyPointVal: 0
+  bunny_unblurred: {fileID: 2100000, guid: 6245e61c7a81a479aa449f08b279a600, type: 2}
+  bunny_blurred: {fileID: 2100000, guid: 9c45bfddf78734922a2d1b699aaf235f, type: 2}
 --- !u!114 &8026034220528757218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,6 +155,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-333523523860860699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2918473789775197460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee158225ee1e59f4791627785501d950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shaderTypes: 0
+  normalStrenght: 5
+  normalSmoothing: 1
+  computingNormal: 0
 --- !u!1 &8891754482082400438
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +186,7 @@ GameObject:
   - component: {fileID: 4209113118574394002}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Bunny
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

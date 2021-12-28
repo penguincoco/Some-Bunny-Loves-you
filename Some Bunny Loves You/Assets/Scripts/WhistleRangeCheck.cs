@@ -5,7 +5,7 @@ using UnityEngine;
 public class WhistleRangeCheck : MonoBehaviour
 {
     //List<Collider2D> bunniesInRange;
-    Collider2D[] bunniesInRange;
+    public Collider2D[] bunniesInRange;
     //Collider[] bunniesInRange;
     public LayerMask m_LayerMask;
     public ContactFilter2D m_contactFilter;
@@ -23,8 +23,6 @@ public class WhistleRangeCheck : MonoBehaviour
     public void CheckForBunnies()
     {
         Debug.Log("whistling");
-        //Use the OverlapBox to detect if there are any other colliders within this box area.
-        //Use the GameObject's centre, half the size (as a radius) and rotation. This creates an invisible box around your GameObject.
 
         //bunniesInRange = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, m_LayerMask);
         bunniesInRange = Physics2D.OverlapCircleAll(gameObject.transform.position, 3f, m_LayerMask, -100f, 100f);
@@ -32,7 +30,7 @@ public class WhistleRangeCheck : MonoBehaviour
         foreach (Collider2D bunny in bunniesInRange)
         //foreach (Collider bunny in bunniesInRange)
         {
-            if (bunny != null && bunny.transform.parent.gameObject.GetComponent<Bunny>() != null)
+            if (bunny != null && bunny.gameObject.tag.Equals("Bunny"))
             {
                 Debug.Log("changing");
                 bunny.transform.parent.gameObject.GetComponent<Bunny>().ChangeState();

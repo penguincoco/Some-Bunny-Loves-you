@@ -27,13 +27,13 @@ public class UIManager : MonoBehaviour
         Debug.Log("a button was pressed");
         if (wPressed)
         {
-            keySprites[0].color = litColour;
-            keySprites[1].color = Color.white;
+            keySprites[0].color = Color.white;
+            keySprites[1].color = litColour;
         }
         else
         {
-            keySprites[0].color = Color.white;
-            keySprites[1].color = litColour;
+            keySprites[0].color = litColour;
+            keySprites[1].color = Color.white;
         }
     }
 

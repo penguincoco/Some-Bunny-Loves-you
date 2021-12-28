@@ -19,6 +19,9 @@ public class Bunny : MonoBehaviour
 
     [SerializeField]private int bunnyPointVal;
 
+    public Material bunny_unblurred; 
+    public Material bunny_blurred; 
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -36,19 +39,23 @@ public class Bunny : MonoBehaviour
         bunnyState = "eating";
 
         //give it a random location
-        gameObject.transform.position = new Vector2(Random.Range(-5,35), Random.Range(-5,5));
+        // gameObject.transform.position = new Vector2(Random.Range(-5,35), Random.Range(-5,5));
 
-        //give it a random layer
-        if (Random.Range(0, 2) == 1)
-        {
-            this.gameObject.layer = 6;
-            GameManager.Instance.backgroundObjs.Add(this.gameObject);
-        }
-        else
-        {
-            this.gameObject.layer = 7;
-            GameManager.Instance.foregroundObjs.Add(this.gameObject);
-        }
+        // //give it a random layer
+        // if (Random.Range(0, 2) == 1)
+        // {
+        //     this.gameObject.layer = 6;
+        //     GameManager.Instance.backgroundObjs.Add(this.gameObject);
+        //     sr.material = bunny_blurred;
+        //     sr.sortingLayerID = SortingLayer.NameToID("background");
+        // }
+        // else
+        // {
+        //     this.gameObject.layer = 7;
+        //     GameManager.Instance.foregroundObjs.Add(this.gameObject);
+        //     sr.material = bunny_unblurred;
+        //     sr.sortingLayerID = SortingLayer.NameToID("foreground");
+        // }
 
         collider = this.gameObject.transform.GetChild(0).gameObject;
 

@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> backgroundObjs = new List<GameObject>();
 
     [SerializeField] private FocusSwitcher focus;
-    public Camera focusCam;
+    //public Camera focusCam;
 
     public bool isForegroundActive = true;
 
@@ -32,6 +32,9 @@ public class GameManager : MonoBehaviour
     public bool debugMode;
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }   
+
+    public Material m_blurred;
+    public Material m_unblurred;
 
     private void Awake()
     {
@@ -101,8 +104,18 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("toggling");
             UIManager.Instance.LightUpSprite(true);
-            focusCam.cullingMask = 1 << foregroundLayer;
+            //focusCam.cullingMask = 1 << foregroundLayer;
+            foreach (GameObject obj in foregroundObjs)
+            {
+                if (obj != null)
+                    obj.gameObject.GetComponent<SpriteRenderer>().material = m_unblurred;
+            }
 
+            foreach (GameObject obj in backgroundObjs)
+            {
+                if (obj != null)
+                    obj.gameObject.GetComponent<SpriteRenderer>().material = m_blurred;
+            }
             //enable all clickable objects
             ToggleClickableObjects(true, foregroundObjs);
             ToggleClickableObjects(false, backgroundObjs);
@@ -113,7 +126,18 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
             UIManager.Instance.LightUpSprite(false);
-            focusCam.cullingMask = 1 << backgroundLayer;
+            //focusCam.cullingMask = 1 << backgroundLayer;
+            foreach (GameObject obj in foregroundObjs)
+            {
+                if (obj != null)
+                    obj.gameObject.GetComponent<SpriteRenderer>().material = m_blurred;
+            }
+                
+            foreach (GameObject obj in backgroundObjs) 
+            {
+                if (obj != null)
+                    obj.gameObject.GetComponent<SpriteRenderer>().material = m_unblurred;
+            }
 
             ToggleClickableObjects(false, foregroundObjs);
             ToggleClickableObjects(true, backgroundObjs);
@@ -166,7 +190,7 @@ public class GameManager : MonoBehaviour
         backgroundLayer = LayerMask.NameToLayer("background");
         ignoreRaycastLayer = LayerMask.NameToLayer("Ignore Raycast");
         defaultLayer = LayerMask.NameToLayer("Default");
-        focusCam.cullingMask = 1 << foregroundLayer;
+        //focusCam.cullingMask = 1 << foregroundLayer;
 
         ToggleClickableObjects(false, foregroundObjs);
         ToggleClickableObjects(false, backgroundObjs);
