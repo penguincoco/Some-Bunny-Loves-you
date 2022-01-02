@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: -1879197975
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: e7a1cb89a757141a189bf1df8ec1cf09, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7297eefd3bdb44de7b17388fbad32c66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -116,11 +116,11 @@ MonoBehaviour:
   collider: {fileID: 0}
   sr: {fileID: 0}
   bunnyRestingSprites:
-  - {fileID: 21300000, guid: fc8d4ffaccf0d4253ac094cb2ff83902, type: 3}
-  - {fileID: 21300000, guid: e21ba434c3a0149d59d1732d37cebeee, type: 3}
+  - {fileID: 21300000, guid: 7297eefd3bdb44de7b17388fbad32c66, type: 3}
+  - {fileID: 21300000, guid: 8203aa1cde88647f3aca891cb7263bff, type: 3}
   bunnyStateSprites:
-  - {fileID: 0}
-  - {fileID: 21300000, guid: 5fa5587b07b6546339e5cc99b42c6c09, type: 3}
+  - {fileID: 21300000, guid: 8ce3816a8ceaa4a569bfdb65cf1bf0db, type: 3}
+  - {fileID: 21300000, guid: 8ce3816a8ceaa4a569bfdb65cf1bf0db, type: 3}
   alertTimer: 0
   bunnyState: 
   bunnyPointVal: 0

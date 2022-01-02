@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class FadeObject : MonoBehaviour
 {
     public Color colourToFadeTo;
-    
     public float fadeTime;
 
     public void Fade(int fadeDirection) 
@@ -47,5 +46,27 @@ public class FadeObject : MonoBehaviour
 
 		if(fadeDirection == 0)
 			objToFade.enabled = false;
+    }
+
+    public void FadeColorsWrapper(Graphic objToFade, Color currColor, Color nextColor, float time) 
+    {
+        StartCoroutine(FadeColors(objToFade, currColor, nextColor, time));
+    }
+
+    public void FadeColorsWrapper(Color currColor, Color nextColor, float time)
+    {
+        StartCoroutine(FadeColors(this.gameObject.GetComponent<Image>(), currColor, nextColor, time));
+    }
+
+    private IEnumerator FadeColors(Graphic objToFade, Color currColor, Color nextColor, float time)
+    {
+        Debug.Log("Lerping Color");
+        float elapsedTime = 0.0f;
+        while (elapsedTime < time)
+        {
+            elapsedTime += Time.deltaTime;
+            objToFade.color = Color.Lerp(currColor, nextColor, (elapsedTime / time));
+            yield return null;
+        }
     }
 }

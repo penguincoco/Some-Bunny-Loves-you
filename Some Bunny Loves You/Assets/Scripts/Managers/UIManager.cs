@@ -11,7 +11,9 @@ public class UIManager : MonoBehaviour
     public Image[] keySprites;
     public Image whistleButtonImg;
 
-    public Color litColour;
+    public Color unlitColour;
+
+    public float whistleLightupTime;
 
     private void Awake()
     {
@@ -24,31 +26,35 @@ public class UIManager : MonoBehaviour
 
     public void LightUpSprite(bool wPressed) 
     {
-        Debug.Log("a button was pressed");
         if (wPressed)
         {
             keySprites[0].color = Color.white;
-            keySprites[1].color = litColour;
+            keySprites[1].color = unlitColour;
         }
         else
         {
-            keySprites[0].color = litColour;
+            keySprites[0].color = unlitColour;
             keySprites[1].color = Color.white;
         }
     }
 
     public void LightUpWhistle()
     {
-        StartCoroutine(FlashSprite(whistleButtonImg));
+        StartCoroutine(FlashSprite(whistleButtonImg, whistleLightupTime));
     }
 
-    public IEnumerator FlashSprite(Image img)
+    public void LightUpSprite(Image img, float lightupTime)
     {
-        img.color = litColour;
+        StartCoroutine(FlashSprite(img, lightupTime));
+    }
 
-        yield return new WaitForSeconds(0.5f);
-
+    public IEnumerator FlashSprite(Image img, float time)
+    {
         img.color = Color.white;
+
+        yield return new WaitForSeconds(time);
+
+        img.color = unlitColour;
     }
 
 }

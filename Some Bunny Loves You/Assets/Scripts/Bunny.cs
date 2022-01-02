@@ -23,20 +23,26 @@ public class Bunny : MonoBehaviour
     public Material bunny_blurred; 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         bunnySM = new FiniteStateMachine<Bunny>(this);
-        bunnySM.TransitionTo<Eating>();
+        bunnySM.TransitionTo<Resting>();
 
         InitializeBunny();
     }
 
     private void InitializeBunny()
     {
-        alertTimer = BunnyManager.Instance.GetBunnyAlertTimer();
+        if (BunnyManager.Instance != null)
+            alertTimer = BunnyManager.Instance.GetBunnyAlertTimer();
 
         sr = this.gameObject.GetComponent<SpriteRenderer>();
-        bunnyState = "eating";
+        bunnyState = "Resting";
+        
+        if (sr.sortingLayerName.Equals("background") && GameManager.Instance != null) 
+            GameManager.Instance.backgroundObjs.Add(this.gameObject);
+        if (sr.sortingLayerName.Equals("foreground") && GameManager.Instance != null) 
+            GameManager.Instance.foregroundObjs.Add(this.gameObject);
 
         //give it a random location
         // gameObject.transform.position = new Vector2(Random.Range(-5,35), Random.Range(-5,5));
@@ -70,15 +76,15 @@ public class Bunny : MonoBehaviour
 
     public void ChangeState()
     {
-        if (bunnySM.CurrentState.GetType() == typeof(Eating))
+        if (bunnySM.CurrentState.GetType() == typeof(Resting))
             bunnySM.TransitionTo<Alert>();
         if (bunnySM.CurrentState.GetType() == typeof(Alert))
             bunnySM.TransitionTo<Running>();
 
-        //if (bunnySM.CurrentState == Eating || bunnySM.CurrentState == Resting)
+        //if (bunnySM.CurrentState == Resting || bunnySM.CurrentState == Resting)
         //  bunnySM.TransitionTo<Alert>();
 
-        //if (bunnyState.Equals("eating"))
+        //if (bunnyState.Equals("Resting"))
         //    bunnySM.TransitionTo<Alert>();
         //if (bunnyState.Equals("alert"))
         //    bunnySM.TransitionTo<Running>();
@@ -98,11 +104,11 @@ public class Bunny : MonoBehaviour
 
 
 
-    private class Eating : FiniteStateMachine<Bunny>.State
+    private class Resting : FiniteStateMachine<Bunny>.State
     {
         public override void OnEnter()
         {
-            Context.bunnyState = "eating";
+            Context.bunnyState = "Resting";
             Context.bunnyPointVal = 1;
             Context.sr.sprite = Context.bunnyStateSprites[0];
         }
@@ -132,7 +138,7 @@ public class Bunny : MonoBehaviour
             timer = Context.alertTimer;
             Context.bunnyState = "alert";
             Context.bunnyPointVal = 2; 
-            Context.sr.sprite = Context.bunnyStateSprites[1];
+            Context.sr.sprite = Context.bunnyStateSprites[0];
         }
 
         public override void Update()
@@ -141,7 +147,7 @@ public class Bunny : MonoBehaviour
 
             if (timer <= 0)
             {
-                TransitionTo<Eating>();
+                TransitionTo<Resting>();
             }
         }
 

@@ -5,31 +5,35 @@ using UnityEngine.UI;
 
 public class CutsceneManager : MonoBehaviour
 {
-    public float introWaitTime;
-    public float fadeWaitTime;
+    public bool debugMode;
+    private static CutsceneManager _instance;
+    public static CutsceneManager Instance { get { return _instance; } }
 
+    public float globalFadeWaitTime;
     public Image blackImg;
+    public FadeObject fadeScr;
 
-    public FadeObject fadeScr; 
+    public GameObject introObj;
+
+    private void Awake()
+    {
+        //singleton pattern
+        if (_instance != null && _instance != this)
+            Destroy(this.gameObject);
+        else
+            _instance = this;
+    }
 
     void Start() 
     {
         fadeScr = this.gameObject.GetComponent<FadeObject>();
-        StartCoroutine(Intro());
+        if (introObj != null)
+            PlayCutscene(introObj);
     }
 
-    private IEnumerator Intro() 
+    public void PlayCutscene(GameObject cutsceneObj) 
     {
-        //play some kind of text
-        blackImg.gameObject.GetComponent<FadeObject>().Fade(0, fadeWaitTime);
-
-        yield return new WaitForSeconds(fadeWaitTime);
-
-        GameManager.Instance.ToggleClickableObjects(true, GameManager.Instance.foregroundObjs);
-        GameManager.Instance.ToggleClickableObjects(false, GameManager.Instance.backgroundObjs);
-
-        GameManager.Instance.isPauseMenuOpen = false;
-
-        CameraManager.Instance.EnableMovements(true);
+        if (cutsceneObj.gameObject.GetComponent<Cutscene>() != null)
+            StartCoroutine(cutsceneObj.gameObject.GetComponent<Cutscene>().CutsceneWrapper());
     }
 }

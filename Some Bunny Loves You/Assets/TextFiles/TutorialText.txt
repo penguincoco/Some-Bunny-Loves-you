@@ -1,0 +1,7 @@
+Press W to switch to the foreground
+Press S to switch to the background
+Left click to collect bunnies 
+Press E to whistle 
+Whistling at bunnies will change their state
+Get extra points for bunnies in unique states! 
+But be careful, bunnies are prone to bolting if they're too startled! 
