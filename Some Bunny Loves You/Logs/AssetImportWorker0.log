@@ -3583,3 +3583,19 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 3409.952615 seconds.
+  path: Assets/Art/PSDs/Mouse.psd
+  artifactKey: Guid(7ffca406f2d844300a49f86d1fe8a5eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/PSDs/Mouse.psd using Guid(7ffca406f2d844300a49f86d1fe8a5eb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a74d2c4b1716c400103855878c66301') in 0.206065 seconds 
+  Import took 0.211916 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.766015 seconds.
+  path: Assets/Art/PSDs/cartoon assets.psd
+  artifactKey: Guid(49eb2affb322a4cdcb296bd29a3d5572) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Art/PSDs/cartoon assets.psd using Guid(49eb2affb322a4cdcb296bd29a3d5572) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c67556b0f70db3e2d7d0e5c44a8972a7') in 0.024115 seconds 
+  Import took 0.029574 seconds .
+
