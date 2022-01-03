@@ -39,10 +39,11 @@ public class Bunny : MonoBehaviour
         sr = this.gameObject.GetComponent<SpriteRenderer>();
         bunnyState = "Resting";
         
-        if (sr.sortingLayerName.Equals("background") && GameManager.Instance != null) 
-            GameManager.Instance.backgroundObjs.Add(this.gameObject);
-        if (sr.sortingLayerName.Equals("foreground") && GameManager.Instance != null) 
-            GameManager.Instance.foregroundObjs.Add(this.gameObject);
+        //give it a random layer 
+        // if (sr.sortingLayerName.Equals("background") && GameManager.Instance != null) 
+        //     GameManager.Instance.backgroundObjs.Add(this.gameObject);
+        // if (sr.sortingLayerName.Equals("foreground") && GameManager.Instance != null) 
+        //     GameManager.Instance.foregroundObjs.Add(this.gameObject);
 
         //give it a random location
         // gameObject.transform.position = new Vector2(Random.Range(-5,35), Random.Range(-5,5));

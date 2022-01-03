@@ -29,14 +29,6 @@ public class CameraManager : MonoBehaviour
         camMovementScr = this.gameObject.GetComponent<CameraMovement>();
     }
 
-    void Update() 
-    {
-        if (GameManager.Instance.debugMode) 
-        {
-            EnableMovements(false);
-        }
-    }
-
     public void EnableMovements(bool enable) 
     {
         foreach(Parallax parallaxScr in parallaxScrs) 

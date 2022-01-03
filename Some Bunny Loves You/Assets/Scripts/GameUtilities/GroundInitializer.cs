@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class GroundInitializer : MonoBehaviour
 {
-    // public GameObject foregroundObjs
-    public List<GameObject> listToReturn;
+    public GameObject foregroundObjsContainer;
+    public GameObject backgroundObjsContainer;
+
+    public List<GameObject> foregroundObjs = new List<GameObject>();
+    public List<GameObject> backgroundObjs = new List<GameObject>();
+
+    void Awake() 
+    {
+        foregroundObjs = InitializeGround(foregroundObjsContainer);
+        backgroundObjs = InitializeGround(backgroundObjsContainer);
+    }
 
     public List<GameObject> InitializeGround(GameObject objContainer) 
     {
-        listToReturn.Clear();
+        List<GameObject> listToReturn = new List<GameObject>();
 
         foreach (Transform child in objContainer.transform) 
             listToReturn.Add(child.gameObject);

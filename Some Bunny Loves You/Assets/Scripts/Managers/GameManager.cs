@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class GameManager : MonoBehaviour
@@ -13,8 +12,8 @@ public class GameManager : MonoBehaviour
     public TMP_Text bunnyCounterTxt;
     private int bunnyCounter;
 
-    public GameObject foregroundObjsContainer;
-    public GameObject backgroundObjsContainer;
+    // public GameObject foregroundObjsContainer;
+    // public GameObject backgroundObjsContainer;
 
     public List<GameObject> foregroundObjs = new List<GameObject>();
     public List<GameObject> backgroundObjs = new List<GameObject>();
@@ -28,13 +27,9 @@ public class GameManager : MonoBehaviour
     int backgroundLayer;
     int ignoreRaycastLayer;
     int defaultLayer;
-
-    public bool debugMode;
+    
     private static GameManager _instance;
-    public static GameManager Instance { get { return _instance; } }   
-
-    public Material m_blurred;
-    public Material m_unblurred;
+    public static GameManager Instance { get { return _instance; } }
 
     private void Awake()
     {
@@ -65,9 +60,6 @@ public class GameManager : MonoBehaviour
             else
                 PauseMenu(true, false); 
         }
-
-        if (debugMode)
-            DebugKeys();
     }
 
     public void PauseMenu(bool isPauseMenuOpen, bool areObjectsMoving) 
@@ -117,7 +109,7 @@ public class GameManager : MonoBehaviour
             //     if (obj != null)
             //         obj.gameObject.GetComponent<SpriteRenderer>().material = m_blurred;
             // }
-            this.gameObject.GetComponent<BlurToggler>().ToggleBlur(isForegroundActive, foregroundObjs, backgroundObjs);
+            this.gameObject.GetComponent<GroundsManager>().ToggleBlur(isForegroundActive);
             //enable all clickable objects
             ToggleClickableObjects(true, foregroundObjs);
             ToggleClickableObjects(false, backgroundObjs);
@@ -140,7 +132,7 @@ public class GameManager : MonoBehaviour
             //         obj.gameObject.GetComponent<SpriteRenderer>().material = m_unblurred;
             // }
 
-            this.gameObject.GetComponent<BlurToggler>().ToggleBlur(isForegroundActive, foregroundObjs, backgroundObjs);
+            this.gameObject.GetComponent<GroundsManager>().ToggleBlur(isForegroundActive);
             ToggleClickableObjects(false, foregroundObjs);
             ToggleClickableObjects(true, backgroundObjs);
         }
@@ -153,12 +145,6 @@ public class GameManager : MonoBehaviour
             UIManager.Instance.LightUpWhistle();
             whistleRangeCheckObj.gameObject.GetComponent<WhistleRangeCheck>().CheckForBunnies();
         }
-    }
-
-    public void DebugKeys()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-            SceneManager.LoadScene(0);
     }
 
     public void IncreaseBunnyCounter(int points)
@@ -180,8 +166,8 @@ public class GameManager : MonoBehaviour
 
     void Initialize()
     {
-        foregroundObjs.AddRange(this.gameObject.GetComponent<GroundInitializer>().InitializeGround(foregroundObjsContainer));
-        backgroundObjs.AddRange(this.gameObject.GetComponent<GroundInitializer>().InitializeGround(backgroundObjsContainer));
+        //foregroundObjs.AddRange(this.gameObject.GetComponent<GroundInitializer>().InitializeGround(foregroundObjsContainer));
+        //backgroundObjs.AddRange(this.gameObject.GetComponent<GroundInitializer>().InitializeGround(backgroundObjsContainer));
         // foreach (Transform child in foregroundObjsContainer.transform)
         //    foregroundObjs.Add(child.gameObject);
 

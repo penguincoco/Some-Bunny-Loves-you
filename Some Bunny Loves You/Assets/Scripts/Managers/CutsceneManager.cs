@@ -27,8 +27,11 @@ public class CutsceneManager : MonoBehaviour
     void Start() 
     {
         fadeScr = this.gameObject.GetComponent<FadeObject>();
-        if (introObj != null)
+        if (introObj != null && !DebugManager.Instance.debugMode)
             PlayCutscene(introObj);
+
+        if (DebugManager.Instance.debugMode)
+            introObj.SetActive(false);
     }
 
     public void PlayCutscene(GameObject cutsceneObj) 

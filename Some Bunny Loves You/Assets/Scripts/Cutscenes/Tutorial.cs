@@ -17,11 +17,11 @@ public class Tutorial : Cutscene
 
     public Image[] buttonSprites;
 
-    public GameObject foregroundObjsContainer;
-    public GameObject backgroundObjsContainer;
+    // public GameObject foregroundObjsContainer;
+    // public GameObject backgroundObjsContainer;
 
-    [SerializeField]private List<GameObject> foregroundObjs = new List<GameObject>();
-    [SerializeField]private List<GameObject> backgroundObjs = new List<GameObject>();
+    // [SerializeField]private List<GameObject> foregroundObjs = new List<GameObject>();
+    // [SerializeField]private List<GameObject> backgroundObjs = new List<GameObject>();
 
     private Dictionary<int, System.Action> tutorialIndexFunctionDict = new Dictionary<int, System.Action>();
 
@@ -32,8 +32,11 @@ public class Tutorial : Cutscene
 
         textWriter.enabled = false;
 
-        foregroundObjs = gm.gameObject.GetComponent<GroundInitializer>().InitializeGround(foregroundObjsContainer);
-        backgroundObjs = gm.gameObject.GetComponent<GroundInitializer>().InitializeGround(backgroundObjsContainer);
+        // foregroundObjs = gm.gameObject.GetComponent<GroundInitializer>().foregroundObjs;
+        // backgroundObjs = gm.gameObject.GetComponent<GroundInitializer>().backgroundObjs;
+
+        // foregroundObjs = gm.gameObject.GetComponent<GroundInitializer>().InitializeGround(foregroundObjsContainer);
+        // backgroundObjs = gm.gameObject.GetComponent<GroundInitializer>().InitializeGround(backgroundObjsContainer);
 
         // foreach(GameObject obj in foregroundObjs) 
         //     Debug.Log(obj.name);
@@ -42,6 +45,7 @@ public class Tutorial : Cutscene
 
         tutorialIndexFunctionDict.Add(0, StepW);
         tutorialIndexFunctionDict.Add(1, StepS);
+        tutorialIndexFunctionDict.Add(2, StepClick);
     }
 
     public override IEnumerator CutsceneWrapper() 
@@ -52,11 +56,6 @@ public class Tutorial : Cutscene
         foreach(string dialogueLine in textWriter.dialogue) 
         {
             SetPauseTime();
-
-            if (imgIndex < buttonSprites.Length)
-            {
-                UIManager.Instance.LightUpSprite(buttonSprites[imgIndex], pauseTime);
-            }
 
             if (imgIndex < tutorialIndexFunctionDict.Count)
                 tutorialIndexFunctionDict[imgIndex]();
@@ -78,11 +77,19 @@ public class Tutorial : Cutscene
 
     public void StepW() 
     {
-        gm.gameObject.GetComponent<BlurToggler>().ToggleBlur(true, foregroundObjs, backgroundObjs);
+        gm.gameObject.GetComponent<GroundsManager>().ToggleBlur(true);
+        UIManager.Instance.LightUpSprite(buttonSprites[imgIndex], pauseTime);
     }
 
     public void StepS() 
     {
-        gm.gameObject.GetComponent<BlurToggler>().ToggleBlur(false, foregroundObjs, backgroundObjs);
+        gm.gameObject.GetComponent<GroundsManager>().ToggleBlur(false);
+        UIManager.Instance.LightUpSprite(buttonSprites[imgIndex], pauseTime);
+    }
+
+    public void StepClick() 
+    {
+        UIManager.Instance.LightUpSprite(buttonSprites[imgIndex], pauseTime);
+        UIManager.Instance.LightUpSprite(buttonSprites[imgIndex + 1], pauseTime);
     }
 }

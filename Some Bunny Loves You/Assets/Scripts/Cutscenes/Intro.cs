@@ -7,6 +7,11 @@ public class Intro : Cutscene
 {
     public Color nextColor; 
 
+    public void Start() 
+    {
+        base.Start();
+    }
+
     public override IEnumerator CutsceneWrapper()
     {
         yield return new WaitForSeconds(globalFadeWaitTime + 2);
