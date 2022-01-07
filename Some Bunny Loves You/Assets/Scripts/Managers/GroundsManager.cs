@@ -56,6 +56,12 @@ public class GroundsManager : MonoBehaviour
         }
     }
 
+    public void RemoveAllBlur() 
+    {
+        Iterate(m_unblurred, foregroundObjs);
+        Iterate(m_unblurred, backgroundObjs);
+    }
+
     private void Iterate(Material mat, List<GameObject> objs)
     {
         foreach (GameObject obj in objs)

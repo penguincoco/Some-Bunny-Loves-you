@@ -1119,7 +1119,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   bunnyInRangeCount: 0
-  whistleRadius: 0
+  whistleRadius: 3
 --- !u!1 &470148437
 GameObject:
   m_ObjectHideFlags: 0

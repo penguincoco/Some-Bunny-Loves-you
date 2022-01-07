@@ -12,17 +12,24 @@ public class Cutscene : MonoBehaviour
     public void Start() 
     {
         if (this.gameObject.GetComponent<TextWriter>() != null) 
-        {
-            Debug.Log("Setting a text writer");
             textWriter = this.gameObject.GetComponent<TextWriter>();
-        }
 
         globalFadeWaitTime = CutsceneManager.Instance.globalFadeWaitTime;
         blackImg = CutsceneManager.Instance.blackImg;
     }
+
+    public virtual void CutsceneWrapper()
+    {
+        StartCoroutine(CutsceneSequence());
+    }
     
-    public virtual IEnumerator CutsceneWrapper() 
+    public virtual IEnumerator CutsceneSequence() 
     {
         yield return null;
+    }
+
+    public virtual void Reset() 
+    {
+
     }
 }

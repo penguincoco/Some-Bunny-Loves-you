@@ -37,6 +37,6 @@ public class CutsceneManager : MonoBehaviour
     public void PlayCutscene(GameObject cutsceneObj) 
     {
         if (cutsceneObj.gameObject.GetComponent<Cutscene>() != null)
-            StartCoroutine(cutsceneObj.gameObject.GetComponent<Cutscene>().CutsceneWrapper());
+            cutsceneObj.gameObject.GetComponent<Cutscene>().CutsceneWrapper();
     }
 }

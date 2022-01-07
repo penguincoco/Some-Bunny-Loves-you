@@ -66,6 +66,16 @@ public class TextWriter : MonoBehaviour
         uiText.text = "";
     }
 
+    public void Reset() 
+    {
+        ClearText();
+        dialogueIndex = 0;
+        textToWrite = dialogue[0];
+        uiText.text = "";
+        timer = 0f;
+        characterIndex = 0;
+    } 
+
     public void SetNextText() 
     {
         ClearText();

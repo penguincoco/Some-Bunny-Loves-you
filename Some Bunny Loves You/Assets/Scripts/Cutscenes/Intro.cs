@@ -12,7 +12,7 @@ public class Intro : Cutscene
         base.Start();
     }
 
-    public override IEnumerator CutsceneWrapper()
+    public override IEnumerator CutsceneSequence()
     {
         yield return new WaitForSeconds(globalFadeWaitTime + 2);
         //play some kind of text

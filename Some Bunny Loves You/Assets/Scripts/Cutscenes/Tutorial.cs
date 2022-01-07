@@ -17,6 +17,8 @@ public class Tutorial : Cutscene
 
     public Image[] buttonSprites;
 
+    public List<GameObject> whistleInRangeBunnies = new List<GameObject>();
+
     // public GameObject foregroundObjsContainer;
     // public GameObject backgroundObjsContainer;
 
@@ -28,8 +30,6 @@ public class Tutorial : Cutscene
     void Start() 
     {
         base.Start();
-        StartCoroutine(CutsceneWrapper());
-
         textWriter.enabled = false;
 
         // foregroundObjs = gm.gameObject.GetComponent<GroundInitializer>().foregroundObjs;
@@ -46,9 +46,27 @@ public class Tutorial : Cutscene
         tutorialIndexFunctionDict.Add(0, StepW);
         tutorialIndexFunctionDict.Add(1, StepS);
         tutorialIndexFunctionDict.Add(2, StepClick);
+        tutorialIndexFunctionDict.Add(3, StepE);
     }
 
-    public override IEnumerator CutsceneWrapper() 
+    public override void CutsceneWrapper() 
+    {
+        StartCoroutine(CutsceneSequence());
+    }
+
+    public override void Reset() 
+    {
+        textWriter.enabled = false;
+        textWriter.Reset();
+        gm.gameObject.GetComponent<GroundsManager>().RemoveAllBlur();
+        UIManager.Instance.ResetSprites(buttonSprites);
+
+        pauseTime = 0;
+        timePerLine = 0;
+        imgIndex = 0;
+    }
+
+    public override IEnumerator CutsceneSequence() 
     {
         yield return new WaitForSeconds(initialPauseTime);
 
@@ -91,5 +109,14 @@ public class Tutorial : Cutscene
     {
         UIManager.Instance.LightUpSprite(buttonSprites[imgIndex], pauseTime);
         UIManager.Instance.LightUpSprite(buttonSprites[imgIndex + 1], pauseTime);
+    }
+
+    public void StepE() 
+    {
+        Debug.Log(imgIndex);
+        UIManager.Instance.LightUpSprite(buttonSprites[imgIndex], pauseTime);
+
+        foreach(GameObject bunny in whistleInRangeBunnies)
+            bunny.gameObject.GetComponent<Bunny>().ChangeState();
     }
 }

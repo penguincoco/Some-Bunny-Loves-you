@@ -135,11 +135,12 @@ public class Bunny : MonoBehaviour
 
         public override void OnEnter()
         {
-            Context.sr.color = Color.red;
+            Debug.Log("entering alert");
+            // Context.sr.color = Color.red;
             timer = Context.alertTimer;
             Context.bunnyState = "alert";
             Context.bunnyPointVal = 2; 
-            Context.sr.sprite = Context.bunnyStateSprites[0];
+            Context.sr.sprite = Context.bunnyStateSprites[1];
         }
 
         public override void Update()
@@ -162,6 +163,7 @@ public class Bunny : MonoBehaviour
         float runTimer = 1f;
         public override void OnEnter()
         {
+            Debug.Log("entering running");
             Context.sr.color = Color.green;
             Context.bunnyPointVal = 3;
         }

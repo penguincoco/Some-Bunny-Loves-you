@@ -57,4 +57,10 @@ public class UIManager : MonoBehaviour
         img.color = unlitColour;
     }
 
+    public void ResetSprites(Image[] imgs) 
+    {
+        foreach(Image img in imgs)
+            img.color = unlitColour;
+    }
+
 }

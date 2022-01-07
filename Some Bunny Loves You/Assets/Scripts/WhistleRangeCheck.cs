@@ -22,10 +22,10 @@ public class WhistleRangeCheck : MonoBehaviour
 
     public void CheckForBunnies()
     {
-        Debug.Log("whistling");
-
         //bunniesInRange = Physics.OverlapBox(gameObject.transform.position, transform.localScale / 2, Quaternion.identity, m_LayerMask);
-        bunniesInRange = Physics2D.OverlapCircleAll(gameObject.transform.position, 3f, m_LayerMask, -100f, 100f);
+        bunniesInRange = Physics2D.OverlapCircleAll(gameObject.transform.position, whistleRadius, m_LayerMask, -100f, 100f);
+
+        Debug.Log(bunniesInRange.Length);
 
         foreach (Collider2D bunny in bunniesInRange)
         //foreach (Collider bunny in bunniesInRange)
