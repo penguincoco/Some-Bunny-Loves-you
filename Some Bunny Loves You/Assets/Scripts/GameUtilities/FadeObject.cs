@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro; 
 
 public class FadeObject : MonoBehaviour
 {
@@ -60,7 +61,6 @@ public class FadeObject : MonoBehaviour
 
     private IEnumerator FadeColors(Graphic objToFade, Color currColor, Color nextColor, float time)
     {
-        Debug.Log("Lerping Color");
         float elapsedTime = 0.0f;
         while (elapsedTime < time)
         {
@@ -69,4 +69,9 @@ public class FadeObject : MonoBehaviour
             yield return null;
         }
     }
+
+    //public void FadeTextWrapper(TMP_Text text, int fadeDirection, float fadeTime)
+    //{
+    //    StartCoroutine(FadeUI(text, fadeDirection, fadeTime));
+    //}
 }

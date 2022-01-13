@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Tutorial : Cutscene
 {
@@ -19,11 +20,9 @@ public class Tutorial : Cutscene
 
     public List<GameObject> whistleInRangeBunnies = new List<GameObject>();
 
-    // public GameObject foregroundObjsContainer;
-    // public GameObject backgroundObjsContainer;
+    public TMP_Text bunnyCounterText;
 
-    // [SerializeField]private List<GameObject> foregroundObjs = new List<GameObject>();
-    // [SerializeField]private List<GameObject> backgroundObjs = new List<GameObject>();
+    public GameObject[] bunniesToDelete;
 
     private Dictionary<int, System.Action> tutorialIndexFunctionDict = new Dictionary<int, System.Action>();
 
@@ -107,16 +106,29 @@ public class Tutorial : Cutscene
 
     public void StepClick() 
     {
-        UIManager.Instance.LightUpSprite(buttonSprites[imgIndex], pauseTime);
-        UIManager.Instance.LightUpSprite(buttonSprites[imgIndex + 1], pauseTime);
+        StartCoroutine(StepClickIterator());
+    }
+
+    private IEnumerator StepClickIterator()
+    {
+        buttonSprites[imgIndex + 1].enabled = true;
+
+        yield return new WaitForSeconds(1f);
+
+        UIManager.Instance.LightUpSprite(buttonSprites[imgIndex], pauseTime - 1f);
+        UIManager.Instance.LightUpSprite(buttonSprites[imgIndex + 1], pauseTime - 1f);
+        Destroy(bunniesToDelete[0]);
+        bunnyCounterText.text = 1.ToString();
     }
 
     public void StepE() 
     {
-        Debug.Log(imgIndex);
         UIManager.Instance.LightUpSprite(buttonSprites[imgIndex], pauseTime);
 
         foreach(GameObject bunny in whistleInRangeBunnies)
-            bunny.gameObject.GetComponent<Bunny>().ChangeState();
+        {
+            if (bunny != null)
+                bunny.gameObject.GetComponent<SpriteSwapper>().SwapSprite(0);
+        }
     }
 }

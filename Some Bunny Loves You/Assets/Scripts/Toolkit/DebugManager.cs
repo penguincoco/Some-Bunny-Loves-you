@@ -36,12 +36,12 @@ public class DebugManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
             SceneManager.LoadScene(0);
         
-        if (CameraManager.Instance != null)
-        {
-            if (cameraDebugMode) 
-                CameraManager.Instance.EnableMovements(false);
-            else 
-                CameraManager.Instance.EnableMovements(true);
-        }
+        //if (CameraManager.Instance != null)
+        //{
+        //    if (cameraDebugMode) 
+        //        CameraManager.Instance.EnableMovements(false);
+        //    else 
+        //        CameraManager.Instance.EnableMovements(true);
+        //}
     }
 }

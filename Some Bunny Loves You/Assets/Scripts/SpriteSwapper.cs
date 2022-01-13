@@ -16,9 +16,14 @@ public class SpriteSwapper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            sr.color = Color.red;
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    sr.color = Color.red;
+        //}
+    }
+
+    public void SwapSprite(int indexToSwapTo)
+    {
+        sr.sprite = sprites[indexToSwapTo];
     }
 }
