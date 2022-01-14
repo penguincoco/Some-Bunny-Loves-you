@@ -8,6 +8,8 @@ public class BunnyManager : MonoBehaviour
     public int numberOfBunnies;
     public float bunnyAlertTimer;
 
+    public GameObject[] allBunnies;
+
     private static BunnyManager _instance;
     public static BunnyManager Instance { get { return _instance; } }
 
@@ -23,6 +25,11 @@ public class BunnyManager : MonoBehaviour
             _instance = this;
         }
         SpawnBunnies();
+    }
+
+    void Start()
+    {
+        allBunnies = GameObject.FindGameObjectsWithTag("Bunny");
     }
 
     private void SpawnBunnies()

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Overlap Object
   - Bunny
+  - Bunny Collider
   layers:
   - Default
   - TransparentFX

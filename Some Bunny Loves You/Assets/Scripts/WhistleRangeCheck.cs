@@ -30,7 +30,7 @@ public class WhistleRangeCheck : MonoBehaviour
         foreach (Collider2D bunny in bunniesInRange)
         //foreach (Collider bunny in bunniesInRange)
         {
-            if (bunny != null && bunny.gameObject.tag.Equals("Bunny"))
+            if (bunny != null && bunny.gameObject.tag.Equals("Bunny Collider"))
             {
                 Debug.Log("changing");
                 bunny.transform.parent.gameObject.GetComponent<Bunny>().ChangeState();

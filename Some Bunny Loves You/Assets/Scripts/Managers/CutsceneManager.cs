@@ -14,6 +14,7 @@ public class CutsceneManager : MonoBehaviour
     public FadeObject fadeScr;
 
     public GameObject introObj;
+    public GameObject endingObj;
 
     private void Awake()
     {

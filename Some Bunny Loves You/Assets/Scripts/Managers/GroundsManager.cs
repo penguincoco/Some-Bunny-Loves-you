@@ -27,6 +27,9 @@ public class GroundsManager : MonoBehaviour
 
         foregroundObjs = InitializeGround(foregroundObjsContainer);
         backgroundObjs = InitializeGround(backgroundObjsContainer);
+
+        GameManager.Instance.foregroundObjs = this.foregroundObjs;
+        GameManager.Instance.backgroundObjs = this.backgroundObjs;
     }
 
     public List<GameObject> InitializeGround(GameObject objContainer)

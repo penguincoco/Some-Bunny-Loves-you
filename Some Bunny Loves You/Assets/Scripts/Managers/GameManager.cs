@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
         {
             if (obj != null && obj.gameObject.GetComponent<ClickableObject>() != null)
             {
-                if(toggle)
+                if (toggle)
                     obj.gameObject.GetComponent<Bunny>().collider.layer = defaultLayer;
                 else
                     obj.gameObject.GetComponent<Bunny>().collider.layer = ignoreRaycastLayer;
