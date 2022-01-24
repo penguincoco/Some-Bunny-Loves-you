@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2918473789775197470}
   - component: {fileID: 8026034220528757218}
   - component: {fileID: 2117605248216863694}
-  - component: {fileID: -333523523860860699}
+  - component: {fileID: 4993035302770557279}
   m_Layer: 6
   m_Name: Bunny
   m_TagString: Bunny
@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6245e61c7a81a479aa449f08b279a600, type: 2}
+  - {fileID: 2100000, guid: 9b8a756a3903be548bfbae145ada5dd5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -124,8 +124,8 @@ MonoBehaviour:
   alertTimer: 0
   bunnyState: 
   bunnyPointVal: 0
-  bunny_unblurred: {fileID: 2100000, guid: 6245e61c7a81a479aa449f08b279a600, type: 2}
-  bunny_blurred: {fileID: 2100000, guid: 9c45bfddf78734922a2d1b699aaf235f, type: 2}
+  bunny_unblurred: {fileID: 2100000, guid: 9b8a756a3903be548bfbae145ada5dd5, type: 2}
+  bunny_blurred: {fileID: 2100000, guid: a8dc723cd173ba54c88f3afc11eaed60, type: 2}
 --- !u!114 &8026034220528757218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,7 +155,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-333523523860860699
+--- !u!114 &4993035302770557279
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
