@@ -11,6 +11,8 @@ public class Intro : Cutscene
     public float pauseOnTextBuffer;
     public float initialPauseTime;
 
+    public float pauseBufferTime;
+
     public TMP_Text uiText;
 
     public void Start() 
@@ -27,7 +29,7 @@ public class Intro : Cutscene
         {
             SetPauseTime();
 
-            yield return new WaitForSeconds(pauseTime);
+            yield return new WaitForSeconds(pauseTime + pauseBufferTime);
 
             textWriter.SetNextText();
         }
@@ -45,16 +47,6 @@ public class Intro : Cutscene
             yield return new WaitForSeconds(1f);
         }
 
-        //while (countdownTimer >= 0)
-        //{
-        //    countdownTimer -= Time.deltaTime;
-
-        //    textWriter.uiText.text = Mathf.RoundToInt(countdownTimer).ToString();
-
-        //    yield return null;
-        //}
-
-        //fade the text
         blackImg.gameObject.GetComponent<FadeObject>().FadeUIWrapper(textWriter.uiText, 0, globalFadeWaitTime);
 
         yield return new WaitForSeconds(globalFadeWaitTime);
